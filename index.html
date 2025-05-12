@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>倒计时至16:00</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      background-color: #f4f4f4;
+    }
+    h1 {
+      font-size: 3em;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="countdown">加载中...</h1>
+
+  <script>
+    function updateCountdown() {
+      const now = new Date(); // 当前时间
+      const targetHour = 18; // 目标时间：16:00:00.00
+      const year = now.getFullYear();
+      const month = now.getMonth(); // 月份从 0 开始
+      const date = now.getDate();
+
+      let targetTime = new Date(year, month, date, targetHour, 0, 0, 0); // 今天的16:00:00.00
+
+      // 如果已经过了今天的16点，则设置为明天的16点
+      if (now >= targetTime) {
+        targetTime.setDate(targetTime.getDate() + 1);
+      }
+
+      const diff = targetTime - now; // 差值（毫秒）
+
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "时间已到！";
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const milliseconds = diff % 1000;
+
+      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+      const seconds = String(totalSeconds % 60).padStart(2, '0');
+      const msStr = String(milliseconds).padStart(3, '0').slice(0, 2); // 取前两位毫秒
+
+      document.getElementById("countdown").textContent =
+        `下班倒计时：${hours}小时 ${minutes}分钟 ${seconds}.${msStr}秒`;
+    }
+
+    updateCountdown(); // 初始调用一次
+    setInterval(updateCountdown, 10); // 每 10 毫秒刷新一次（足够平滑）
+  </script>
+
+</body>
+</html>
