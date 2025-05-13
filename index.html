@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>快乐下班倒计时⭐_⭐</title>
+  <title>⏰</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -51,7 +51,7 @@
       const msStr = String(milliseconds).padStart(3, '0').slice(0, 2); // 取前两位毫秒
 
       document.getElementById("countdown").textContent =
-        `距离下班还有：${hours}小时 ${minutes}分钟 ${seconds}.${msStr}秒`;
+        `⏰：${hours}小时 ${minutes} 分钟 ${seconds}.${msStr} 秒`;
     }
 
     updateCountdown(); // 初始调用一次
